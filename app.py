@@ -18,7 +18,7 @@ def get_status():
 
 @app.route('/set_relay/<int:id_relay>', methods=[ 'GET','POST'])
 def set_r(id_relay):
-    if(id_relay != 1) and (id_relay != 2):
+    if(id_relay != 1) and (id_relay != 2):  #controllare nel caso in cui si inserisce un carattere
         return ("Errore: ID del relay errato")
     else:
         json_r = json.dumps(mt.set_stat(id_relay))
