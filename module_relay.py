@@ -6,6 +6,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 from os import getenv
 
+
 url_relays = getenv("url_relays") or "http://10.10.10.82/relays.cgi"
 url_set_relay = getenv("url_set_relay") or "http://10.10.10.82/relays.cgi?relay="  #bisogna appendere "1" o "2" per decidere quale relay cambiare
 username = "admin"
