@@ -40,7 +40,7 @@ def get_stat():
 
 def set_stat(r):
     url = url_set_relay + str(r)
-    result = requests.get(url,auth=aut(username,password)) 
+    result = requests.get(url,auth=aut(USERNAME,PASSWORD)) 
     return "cambiato stato relay " + str(r)
 
 
