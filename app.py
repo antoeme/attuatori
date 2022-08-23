@@ -9,17 +9,21 @@ from urllib import response
 from bs4 import BeautifulSoup
 from requests.auth import HTTPBasicAuth as aut
 from os import getenv
+from dotenv import load_dotenv
 
 
 url_relays = getenv("url_relays") or "http://10.10.10.82/relays.cgi"
 url_set_relay = getenv("url_set_relay") or "http://10.10.10.82/relays.cgi?relay="  #bisogna appendere "1" o "2" per decidere quale relay cambiare
-# username = getenv("USERNAME") or "admin"
-# password = getenv("PASSWORD") or "dtl4b1tc2022!"
-username = "admin"
-password = "dtl4b1tc2022!"
+# USERNAME = getenv("USERNAME") or "admin"
+# PASSWORD = getenv("PASSWORD") or "dtl4b1tc2022!"
+USERNAME = "admin"
+PASSWORD = "dtl4b1tc2022!"
+
+# load environment variables from '.env' file
+load_dotenv()
 
 def get_stat():
-    result = requests.get(url_relays, auth=aut(username,password))   
+    result = requests.get(url_relays, auth=aut(USERNAME,PASSWORD))   
     doc = BeautifulSoup(result.text,"html.parser")
 
     tags = doc.find_all("p")
