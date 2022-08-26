@@ -1,4 +1,4 @@
-FROM python:3.9.13-alpine3.15
+FROM python:3.9.13-slim-buster
 
 WORKDIR /app
 
@@ -8,4 +8,4 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-CMD [ "flask", "run" ]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]

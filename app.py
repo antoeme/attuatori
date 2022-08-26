@@ -8,12 +8,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from urllib import response
 from bs4 import BeautifulSoup
 from requests.auth import HTTPBasicAuth as aut
+
 from os import getenv
 from dotenv import load_dotenv
 
 
-url_relays = getenv("url_relays") or "http://10.10.10.82/relays.cgi"
-url_set_relay = getenv("url_set_relay") or "http://10.10.10.82/relays.cgi?relay="  #bisogna appendere "1" o "2" per decidere quale relay cambiare
+URL_RELAY = getenv("URL_RELAY") 
+URL_SET_RELAY = getenv("URL_SET_RELAY") #bisogna appendere "1" o "2" per decidere quale relay cambiare
 # USERNAME = getenv("USERNAME") or "admin"
 # PASSWORD = getenv("PASSWORD") or "dtl4b1tc2022!"
 USERNAME = "admin"
@@ -23,7 +24,7 @@ PASSWORD = "dtl4b1tc2022!"
 load_dotenv()
 
 def get_stat():
-    result = requests.get(url_relays, auth=aut(USERNAME,PASSWORD))   
+    result = requests.get(URL_RELAY, auth=aut(USERNAME,PASSWORD))   
     doc = BeautifulSoup(result.text,"html.parser")
 
     tags = doc.find_all("p")
@@ -39,7 +40,7 @@ def get_stat():
     return(status)
 
 def set_stat(r):
-    url = url_set_relay + str(r)
+    url = URL_SET_RELAY + str(r)
     result = requests.get(url,auth=aut(USERNAME,PASSWORD)) 
     return "cambiato stato relay " + str(r)
 
