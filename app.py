@@ -24,7 +24,7 @@ PASSWORD = "dtl4b1tc2022!"
 load_dotenv()
 
 def get_stat():
-    result = requests.get(URL_RELAY, auth=aut(USERNAME,PASSWORD))   
+    result = requests.get(str(URL_RELAY), auth=aut(USERNAME,PASSWORD))   
     doc = BeautifulSoup(result.text,"html.parser")
 
     tags = doc.find_all("p")
@@ -40,7 +40,7 @@ def get_stat():
     return(status)
 
 def set_stat(r):
-    url = URL_SET_RELAY + str(r)
+    url = str(URL_SET_RELAY) + str(r)
     result = requests.get(url,auth=aut(USERNAME,PASSWORD)) 
     return "cambiato stato relay " + str(r)
 
