@@ -1,11 +1,9 @@
 
 import json
-from flask import Flask,jsonify
-from requests import request
+from flask import Flask, jsonify
 import requests
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
-from urllib import response
 from bs4 import BeautifulSoup
 from requests.auth import HTTPBasicAuth as aut
 
@@ -59,21 +57,26 @@ def verify_password(username, password):
         return username
 
 
-
-@app.route('/status', methods=['GET'] )   #rotta per la get delle temperature
+@app.route('/prova', methods=['GET'] )   
 @auth.login_required
+def prova():
+    return jsonify("prova")
+
+
+@app.route('/status', methods=['GET'] )   #rotta per la get dello stato dei relay
+#@auth.login_required
 def get_status():
-    json_temps = json.dumps(get_stat())   # dump della lista delle temperature presa in module_temp.py
+    json_temps = json.dumps(get_stat())   # dump della lista dello stato dei relay
     return json_temps
 
 @app.route('/set_relay/<int:id_relay>', methods=[ 'GET','POST'])
 @auth.login_required
 def set_r(id_relay):
-    if(id_relay != 1) and (id_relay != 2):  #controllare nel caso in cui si inserisce un carattere
+    if(id_relay != 1) and (id_relay != 2):  
         return ("Errore: ID del relay errato")
     else:
         json_r = json.dumps(set_stat(id_relay))
         return json_r
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True,port=5001)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', debug=True,port=5001)
